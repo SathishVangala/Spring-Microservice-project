@@ -1,0 +1,23 @@
+server:
+  port: 8085  # ✅ API Gateway will run on port 8085
+
+spring:
+  application:
+    name: API-GATEWAY-SERVICE  # ✅ Correct service name for Eureka registration
+
+  cloud:
+    gateway:
+      routes:
+        - id: USER_SERVICE
+          uri: http://localhost:8080
+          predicates:
+            - Path=/users/**
+
+
+eureka:
+  instance:
+    prefer-ip-address: true
+  client:
+    fetch-registry: true
+    service-url:
+      defaultZone: http://localhost:8762/eureka
